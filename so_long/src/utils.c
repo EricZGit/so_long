@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 12:11:53 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/07 07:04:37 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/08 10:05:34 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t  ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *s)
+/*char	*ft_strdup(const char *s)
 {
 	size_t		i;
 	size_t		len;
@@ -65,6 +65,42 @@ char	*ft_strdup(const char *s)
 	}
 	dup[i] = '\0';
 	return (dup);
+}*/
+char	*ft_strdup(const char *s)
+{
+	size_t	s_len;
+	char	*p;
+	char	*pointer;
+
+	s_len = ft_strlen(s) + 1;
+	p = (char *)ft_calloc(s_len, sizeof(char));
+	if (!p)
+		return (NULL);
+	pointer = p;
+	ft_strlcpy(p, s, s_len);
+	return (pointer);
+}
+
+void	*ft_calloc(size_t nbr, size_t size)
+{
+	char	*p;
+	char	*pointer;
+	size_t	amount;
+	size_t	i;
+
+	amount = nbr * size;
+	p = (char *) malloc(amount);
+	if (!p)
+		return (NULL);
+	pointer = p;
+	i = 0;
+	while (i < amount)
+	{
+		*p = 0;
+		i++;
+		p++;
+	}
+	return ((void *) pointer);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

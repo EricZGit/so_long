@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 10:48:03 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/07 19:22:00 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/08 10:46:58 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	**free_split(char **str);
+void	*ft_calloc(size_t nbr, size_t size);
 
 #endif

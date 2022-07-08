@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 06:40:08 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/07 19:47:29 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/08 10:40:50 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	init_game(t_game *game)
 {
 	game->map = malloc(sizeof(t_map) * 1);
 	game->data = malloc(sizeof(t_data) * 1);
+	game->img = malloc(sizeof(t_img) * 1);
 	game->map->collectables = 0;
 	game->map->players = 0;
 	game->map->out = 0;
