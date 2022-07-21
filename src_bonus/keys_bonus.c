@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 20:29:18 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 04:52:36 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 		ft_going_player(game, key);
 		game->map->moves++;
 		game->map->mapping[line][col] = '0';
-		game->map->mapping[y][x] = 'D';
-		game->data->pos_line = y;
-		game->data->pos_col = x;
+		game->map->mapping[game->map->lines - 1][game->map->columns - 1] = 'D';
 		game->data->end_game = 1;
 		ft_imaging(game);
 		ft_score(game);
