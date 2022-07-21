@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 10:06:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 04:46:53 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:26:19 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,15 @@ void	ft_going_player(t_game *game, int key)
 	if (key == D || key == ARROW_RIGHT)
 		game->data->going_player = 100;
 }
-
-void	screen_ennemy(t_game *game, int line, int col, int death)
+#include <stdio.h>
+#include <unistd.h>
+int	anim_collect(void)
 {
-	if (death == 68) 
-	{
-		int	y;
-		int	x;
-
-		y = 1;
-		while (y < game->map->lines - 1)
-		{
-			x = 1;
-			while (x < game->map->columns - 1)
-			{
-				mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-				game->img->img_death, x * 64, y * 64);
-				x++;
-			}
-			y++;
-		}
-	}
-	else if (death == 89)
-		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_ennemy_haut, col * 64, line * 64);
-}
-
-void	screen_collectdeath(t_game *game, int y, int x)
-{
-	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_collectdeath, x * 64, y * 64);
+	sleep(0.3);
+	printf("ok1\n");
+	sleep(0.6);
+	printf("ok2\n");
+	sleep(0.9);
+	printf("ok3\n");
+	return (0);
 }

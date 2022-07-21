@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 04:52:36 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:27:12 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	close_window_and_exit(t_game *game)
 {
 	free_images(game);
 	free_score(game);
+	free_score_two(game);
 	mlx_clear_window(game->data->mlx_ptr, game->data->mlx_win);
 	mlx_destroy_window(game->data->mlx_ptr, game->data->mlx_win);
 	mlx_destroy_display(game->data->mlx_ptr);
@@ -48,6 +49,12 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_droite);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_death);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_collectdeath);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinhd);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinhg);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinbd);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinbg);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_avpd);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_avpg);
 }
 
 int	key_actions(int key, t_game *game)
@@ -84,7 +91,9 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	if (move_is_ok == 1)
 	{
 		ft_going_player(game, key);
+//		moving_ennemy(game, key);
 		game->map->moves++;
+		anim_collect();
 		game->map->mapping[line][col] = '0';
 		game->map->mapping[y][x] = 'P';
 		game->data->pos_line = y;
@@ -96,7 +105,17 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	{
 		ft_going_player(game, key);
 		game->map->moves++;
-		game->map->mapping[line][col] = '0';
+		line = 1;
+		while (line < game->map->lines - 1)
+		{
+			col = 1;
+			while ( col < game->map->columns - 1)
+			{
+				game->map->mapping[line][col] = 'D';
+				col++;
+			}
+			line++;
+		}
 		game->map->mapping[game->map->lines - 1][game->map->columns - 1] = 'D';
 		game->data->end_game = 1;
 		ft_imaging(game);
@@ -105,7 +124,9 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	else if (move_is_ok == 3)
 	{
 		ft_going_player(game, key);
+//		moving_ennemy(game, key);
 		game->map->moves++;
+		anim_collect();
 		game->map->mapping[line][col] = '0';
 		game->map->mapping[y][x] = 'P';
 		if (game->data->going_player == 97 \
@@ -125,6 +146,8 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 		ft_imaging(game);
 		ft_score(game);
 	}
+	else
+		anim_collect();
 }
 
 int	ftmove_is_ok(t_game *game, int x, int y, int key)
@@ -154,7 +177,10 @@ int	ftmove_is_ok(t_game *game, int x, int y, int key)
 		return (-1);
 	if (key != A && key != W && key != S && key != D && key != ARROW_UP
 		&& key != ARROW_DOWN && key != ARROW_LEFT && key != ARROW_RIGHT)
-		return (-1);
+		{
+			anim_collect();
+			return (-1);
+		}
 	else
 		return (1);
 }

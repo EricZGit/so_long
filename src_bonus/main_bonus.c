@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:54:14 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 12:07:16 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:25:58 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static void	init_image(t_game *game)
 	load_image_ennemy(game);
 	load_score(game);
 	load_score_two(game);
+	load_image_two(game);
+	load_image_three(game);
 }
 
 static void	init_screen(t_game *game)
@@ -65,7 +67,8 @@ static void	init_screen(t_game *game)
 		exit(EXIT_FAILURE);
 	}
 }
-
+#include <unistd.h>
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -81,6 +84,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.data->mlx_win, 2, 1L << 0, key_actions, &game);
 	mlx_hook(game.data->mlx_win, 17, 0, close_window_and_exit, &game);
 	mlx_loop_hook(game.data->mlx_ptr, ft_imaging, &game);
+	anim_collect();
 	mlx_loop(game.data->mlx_ptr);
 	return (0);
 }

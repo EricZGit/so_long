@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 18:59:13 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 20:25:46 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,21 @@
 # define SCOSEVEN "./images/scoreseven.xpm"
 # define SCOHEIGHT "./images/scoreheight.xpm"
 # define SCONINE "./images/scorenine.xpm"
+# define COINHD "./images/coinhd.xpm"
+# define COINHG "./images/coinhg.xpm"
+# define COINBD "./images/coinbd.xpm"
+# define COINBG "./images/coinbg.xpm"
+# define AVPD "./images/avpd.xpm"
+# define AVPG "./images/avpg.xpm"
+# define PIPIONE "./images/pipione.xpm"
+# define PIPIZERO "./images/pipizero.xpm"
+# define PIPITWO "./images/pipitwo.xpm"
+# define GUITONE "./images/guitone.xpm"
+# define GUITZERO "./images/guitzero.xpm"
+# define GUITTWO "./images/guittwo.xpm"
+# define SOLDONE "./images/soldone.xpm"
+# define SOLDZERO "./images/soldzero.xpm"
+# define SOLDTWO "./images/soldtwo.xpm"
 /*base de donnees des key's*/
 # define ESC 65307
 # define QUIT 113
@@ -123,6 +138,21 @@ typedef struct s_img
 	void	*img_scoreheight;
 	void	*img_scoreneuf;
 	void	*img_scorenine;
+	void	*img_coinhd;
+	void	*img_coinhg;
+	void	*img_coinbd;
+	void	*img_coinbg;
+	void	*img_avpd;
+	void	*img_avpg;
+	void	*img_guitzero;
+	void	*img_guitone;
+	void	*img_guittwo;
+	void	*img_soldzero;
+	void	*img_soldone;
+	void	*img_soldtwo;
+	void	*img_pipione;
+	void	*img_pipitwo;
+	void	*img_pipizero;
 }	t_img;
 
 /*struct pour gerer la map*/
@@ -155,6 +185,8 @@ void	free_mapping(t_game *game);
 int		gnl_map(t_game *game, char *argv);
 /*fonction pour upload les images dans la map*/
 void	load_image(t_game *game);
+void	load_image_two(t_game *game);
+void	load_image_three(t_game *game);
 /*fonction pour upload les images du player dans la map*/
 void	load_player_image(t_game *game);
 /*fonction pour upload les images de l ennemy dans la map*/
@@ -179,6 +211,9 @@ void	screen_ennemy(t_game *game, int line, int col, int death);
 void	screen_collectdeath(t_game *game, int y, int x);
 /*fonction pour afficher le score dans la fenetre*/
 void	ft_score(t_game *game);
+/*fonction qui anime les collectables*/
+int		anim_collect(void);
+void	free_score_two(t_game *game);
 
 /*fonctions pour gerer l affichage du score*/
 void	free_score(t_game *game);

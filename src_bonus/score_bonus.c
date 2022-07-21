@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:44:06 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 18:46:21 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 13:17:36 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,24 @@ void	ft_score(t_game *game)
 	int	cent;
 
 	score = game->map->moves;
-	diz = score % 10;
-	score /= 10;
-	cent = score / 10;
-	score %= 10;
-	ft_put_score(game, diz , game->map->lines - 1, 2);
-	ft_put_score(game, score, game->map->lines - 1, 1);
-	ft_put_scorex(game, cent, game->map->lines - 1, 0);
+	if (score != 1000)
+	{
+		diz = score % 10;
+		score /= 10;
+		cent = score / 10;
+		score %= 10;
+		ft_put_score(game, diz , game->map->lines - 1, 2);
+		ft_put_score(game, score, game->map->lines - 1, 1);
+		ft_put_scorex(game, cent, game->map->lines - 1, 0);
+	}
+	else
+		close_window_and_exit(game);
 }
 
 void	ft_put_score(t_game *game, int diz, int line, int col)
 {
 	void	*image;
+
 	image = NULL;
 	if (diz == 0)
 		image = game->img->img_scorezero;
@@ -59,6 +65,7 @@ void	ft_put_score(t_game *game, int diz, int line, int col)
 void	ft_put_scorex(t_game *game, int diz, int line, int col)
 {
 	void	*image;
+
 	image = NULL;
 	if (diz == 0)
 		image = game->img->img_scorezzero;
@@ -106,4 +113,17 @@ void	free_score(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_scoreheight);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_scoreneuf);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_scorenine);
+}
+
+void	free_score_two(t_game *game)
+{
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_pipizero);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_pipione);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_pipitwo);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_guitzero);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_guitone);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_guittwo);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_soldzero);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_soldone);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_soldtwo);
 }

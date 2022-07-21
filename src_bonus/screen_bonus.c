@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:54:48 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 18:59:21 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 10:23:08 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,24 @@ static void	screen_map(t_game *game, int line, int col)
 		else if ((col == 1 && line == game->map->lines - 1) \
 		|| (col == 2 && line == game->map->lines - 1))
 			ft_score(game);
-		else if ((col == 0 && line == 0) || (col == game->map->columns - 1 \
-		&& line == 0) || (col == game->map->columns - 1 \
-		&& line == game->map->lines - 1))
-		{
+		else if (col == 0 && line == 0)
 			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-			game->img->img_angle, col * 64, line * 64);
-		}
+			game->img->img_coinbg, col * 64, line * 64);
+		else if (col == 1 && line == 0)
+			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+			game->img->img_coinbd, col * 64, line * 64);
+		else if (col == game->map->columns - 2 && line == 0)
+			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+			game->img->img_avpg, col * 64, line * 64);
+		else if (col == game->map->columns - 1 && line == 0)
+			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+			game->img->img_avpd, col * 64, line * 64);
+		else if (col == game->map->columns - 2 && line == game->map->lines - 1)
+			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+			game->img->img_coinhg, col * 64, line * 64);
+		else if (col == game->map->columns - 1 && line == game->map->lines - 1)
+			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+			game->img->img_coinhd, col * 64, line * 64);
 		else
 			mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
 			game->img->img_wall, col * 64, line * 64);

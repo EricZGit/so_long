@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:08 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/20 12:12:53 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/21 10:12:34 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ void	load_player_image(t_game *game)
 		&(game->data->img_hauteur));
 	game->img->img_player_gauche = mlx_xpm_file_to_image(\
 		game->data->mlx_ptr, PLAYER_GAUCHE, &(game->data->img_largeur), \
+		&(game->data->img_hauteur));
+	game->img->img_coinhd = mlx_xpm_file_to_image(\
+		game->data->mlx_ptr, COINHD, &(game->data->img_largeur), \
+		&(game->data->img_hauteur));
+	game->img->img_coinhg = mlx_xpm_file_to_image(\
+		game->data->mlx_ptr, COINHG, &(game->data->img_largeur), \
+		&(game->data->img_hauteur));
+	game->img->img_coinbd = mlx_xpm_file_to_image(\
+		game->data->mlx_ptr, COINBD, &(game->data->img_largeur), \
+		&(game->data->img_hauteur));
+	game->img->img_coinbg = mlx_xpm_file_to_image(\
+		game->data->mlx_ptr, COINBG, &(game->data->img_largeur), \
 		&(game->data->img_hauteur));
 }
 
