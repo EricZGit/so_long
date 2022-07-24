@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:54:48 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 10:23:08 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:20:28 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,17 @@ static void	screen_player(t_game *game, int y, int x)
 		game->img->img_player_haut, x * 64, y * 64);
 }
 
-static void	screen_collectables(t_game *game, int y, int x)
+void	screen_collec_fear(t_game *game)
 {
-	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_collectable, x * 64, y * 64);
+	if (game->data->pos_col == game->data->pos_col_colzero)
+	{
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_collectdeath, game->data->pos_col_colone * 64, \
+		game->data->pos_line_colone * 64);
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_collectdeath, game->data->pos_col_coltwo * 64, \
+		game->data->pos_line_coltwo * 64);
+	}
 }
 
 int	ft_imaging(t_game *game)
@@ -100,8 +107,6 @@ int	ft_imaging(t_game *game)
 			if (game->map->mapping[y][x] == '1' \
 			|| game->map->mapping[y][x] == '0')
 				screen_map(game, y, x);
-			else if (game->map->mapping[y][x] == 'C')
-				screen_collectables(game, y, x);
 			else if (game->map->mapping[y][x] == 'T')
 				screen_collectdeath(game, y, x);
 			else if (game->map->mapping[y][x] == 'E')

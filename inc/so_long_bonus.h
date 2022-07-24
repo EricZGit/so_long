@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 20:25:46 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:54:38 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,14 @@ typedef struct s_data
 	int		pos_line;
 	int		end_game;
 	int		going_player;
+	int		anim;
+	int		pos_col_colzero;
+	int		pos_col_colone;
+	int		pos_col_coltwo;
+	int		pos_line_colzero;
+	int		pos_line_colone;
+	int		pos_line_coltwo;
+
 }	t_data;
 
 /*struct pour gerer les images*/
@@ -211,9 +219,16 @@ void	screen_ennemy(t_game *game, int line, int col, int death);
 void	screen_collectdeath(t_game *game, int y, int x);
 /*fonction pour afficher le score dans la fenetre*/
 void	ft_score(t_game *game);
-/*fonction qui anime les collectables*/
-int		anim_collect(void);
+/*fonctions qui anime les collectables*/
+int		anim_collect(t_game *game);
+int		anim_collectone(t_game *game);
+int		anim_collecttwo(t_game *game);
 void	free_score_two(t_game *game);
+void	screen_collec_sold(t_game *game);
+void	screen_collec_guit(t_game *game);
+void	screen_collec_pipi(t_game *game);
+void	screen_collec_fear(t_game *game);
+void	position_collect(t_game *game);
 
 /*fonctions pour gerer l affichage du score*/
 void	free_score(t_game *game);

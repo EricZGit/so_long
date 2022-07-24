@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl_map_bonus.c                                    :+:      :+:    :+:   */
+/*   gnl_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 08:52:23 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 12:53:14 by ezielins         ###   ########.fr       */
+/*   Created: 2022/07/05 14:00:53 by ezielins          #+#    #+#             */
+/*   Updated: 2022/07/22 12:54:00 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/so_long_bonus.h"
+#include "../inc/so_long.h"
 
 static void	check_buffer(char *buffer, int fd, t_game *game)
 {
@@ -23,10 +23,7 @@ static void	check_buffer(char *buffer, int fd, t_game *game)
 static int	check_items(char c, t_game *game)
 {
 	if (c == 'C')
-	{
 		game->map->collectables++;
-		position_collect(game);
-	}
 	else if (c == 'E')
 		game->map->out++;
 	else if (c == 'P')
@@ -35,7 +32,7 @@ static int	check_items(char c, t_game *game)
 		game->data->pos_line = game->map->lines - 1;
 		game->map->players++;
 	}
-	else if (c == '0' || c == '1' || c == '\n' || c == 'Y')
+	else if (c == '0' || c == '1' || c == '\n')
 		return (1);
 	else
 		print_error(MAP, game);

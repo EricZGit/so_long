@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 07:05:32 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 13:10:23 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:16:51 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,47 @@ void	screen_collectdeath(t_game *game, int y, int x)
 		game->img->img_collectdeath, x * 64, y * 64);
 }
 
-void	load_image_two(t_game *game)
+void	screen_collec_guit(t_game *game)
 {
-	game->img->img_avpd = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, AVPD, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_avpg = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, AVPG, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_pipizero = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, PIPIZERO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_pipione = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, PIPIONE, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_pipitwo = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, PIPITWO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_soldzero = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, SOLDZERO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_soldone = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, SOLDONE, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_soldtwo = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, SOLDTWO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
+	void	*imageguit;
+	
+	imageguit = NULL;
+	if (game->data->anim % 29 == 0)
+		imageguit = game->img->img_guitone;
+	else if (game->data->anim % 49 == 0)
+		imageguit = game->img->img_guittwo;
+	else
+		imageguit = game->img->img_guitzero;
+	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+	imageguit, game->data->pos_col_colone * 64, game->data->pos_line_colone * 64);
 }
 
-void	load_image_three(t_game *game)
+void	screen_collec_pipi(t_game *game)
 {
-	game->img->img_guittwo = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, GUITTWO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_guitzero = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, GUITZERO, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
-	game->img->img_guitone = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, GUITONE, &(game->data->img_largeur), \
-		&(game->data->img_hauteur));
+	void	*imagepipi;
+	
+	imagepipi = NULL;
+	if (game->data->anim % 29 == 0)
+		imagepipi = game->img->img_pipione;
+	else if (game->data->anim % 49 == 0)
+		imagepipi = game->img->img_pipitwo;
+	else
+		imagepipi = game->img->img_pipizero;
+	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+	imagepipi, game->data->pos_col_coltwo * 64, game->data->pos_line_coltwo * 64);
+}
+
+void	screen_collec_sold(t_game *game)
+{
+	void	*imagesold;
+	
+	imagesold = NULL;
+	if (game->data->anim % 29 == 0)
+		imagesold = game->img->img_soldone;
+	else if (game->data->anim % 49 == 0)
+		imagesold = game->img->img_soldtwo;
+	else
+		imagesold = game->img->img_soldzero;
+	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+	imagesold, game->data->pos_col_colzero * 64, game->data->pos_line_colzero * 64);
 }

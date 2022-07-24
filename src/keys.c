@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys_bonus.c                                       :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 18:50:53 by ezielins         ###   ########.fr       */
+/*   Created: 2022/07/07 07:46:50 by ezielins          #+#    #+#             */
+/*   Updated: 2022/07/18 11:43:57 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/colors.h"
-#include "../inc/so_long_bonus.h"
+#include "../inc/so_long.h"
 
 int	close_window_and_exit(t_game *game)
 {
 	free_images(game);
-	free_score(game);
-	free_score_two(game);
 	mlx_clear_window(game->data->mlx_ptr, game->data->mlx_win);
 	mlx_destroy_window(game->data->mlx_ptr, game->data->mlx_win);
 	mlx_destroy_display(game->data->mlx_ptr);
@@ -43,18 +41,6 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exit_close);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exit_open);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_angle);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_haut);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_bas);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_gauche);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_droite);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_death);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_collectdeath);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinhd);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinhg);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinbd);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_coinbg);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_avpd);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_avpg);
 }
 
 int	key_actions(int key, t_game *game)
@@ -90,78 +76,29 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	move_is_ok = ftmove_is_ok(game, x, y, key);
 	if (move_is_ok == 1)
 	{
-		ft_going_player(game, key);
-//		moving_ennemy(game, key);
 		game->map->moves++;
 		game->map->mapping[line][col] = '0';
 		game->map->mapping[y][x] = 'P';
 		game->data->pos_line = y;
 		game->data->pos_col = x;
 		ft_imaging(game);
-		ft_score(game);
-	}
-	else if (move_is_ok == 2)
-	{
-		ft_going_player(game, key);
-		game->map->moves++;
-		line = 1;
-		while (line < game->map->lines - 1)
-		{
-			col = 1;
-			while ( col < game->map->columns - 1)
-			{
-				game->map->mapping[line][col] = 'D';
-				col++;
-			}
-			line++;
-		}
-		game->map->mapping[game->map->lines - 1][game->map->columns - 1] = 'D';
-		game->data->end_game = 1;
-		ft_imaging(game);
-		ft_score(game);
-	}
-	else if (move_is_ok == 3)
-	{
-		ft_going_player(game, key);
-//		moving_ennemy(game, key);
-		game->map->moves++;
-		game->map->collectables--;
-		game->map->mapping[line][col] = '0';
-		game->map->mapping[y][x] = 'P';
-		if (game->data->going_player == 97 \
-		&& game->map->mapping[y][x - 1] != '0')
-			game->map->mapping[y][x - 1] = 'T';
-		else if (game->data->going_player == 100 \
-		&& game->map->mapping[y][x + 1] != '0')
-			game->map->mapping[y][x + 1] = 'T';
-		else if (game->data->going_player == 119 \
-		&& game->map->mapping[y - 1][x] != '0')
-			game->map->mapping[y - 1][x] = 'T';
-		else if (game->data->going_player == 115 \
-		&& game->map->mapping[y + 1][x] != '0')
-			game->map->mapping[y + 1][x] = 'T';
-		game->data->pos_line = y;
-		game->data->pos_col = x;
-		ft_imaging(game);
-		ft_score(game);
+		ft_printf("Moves : \033[0;93m%d\n\033[0;39m", game->map->moves);
 	}
 }
 
 int	ftmove_is_ok(t_game *game, int x, int y, int key)
 {
-	if (game->map->mapping[y][x] == '1' || game->map->mapping[y][x] == 'T')
+	if (game->map->mapping[y][x] == '1')
 		return (-1);
 	if (game->map->mapping[y][x] == 'C')
-		return (3);
-	if (game->map->mapping[y][x] == 'Y')
-	{
-		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
-		return (2);
-	}
+		game->map->collectables--;
 	if (game->map->mapping[y][x] == 'E' && game->map->collectables == 0)
 	{
-		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
+		game->map->mapping[game->data->pos_line] \
+		[game->data->pos_col] = '0';
 		game->data->end_game = 1;
+		game->map->moves++;
+		ft_printf("Moves : \033[0;93m%d\n\033[0;39m", game->map->moves);
 		close_window_and_exit(game);
 		return (-1);
 	}
