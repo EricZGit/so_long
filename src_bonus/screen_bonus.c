@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:54:48 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:50:21 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/25 10:37:22 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,15 @@ static void	screen_map(t_game *game, int line, int col)
 static void	screen_exit(t_game *game, int y, int x)
 {
 	if (game->map->collectables == 0)
+	{
 		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_exitfive, x * 64, y * 64);
-	else if (game->map->moves == 1)
-		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_exittwo, x * 64, y * 64);
-	else if (game->map->moves == 2)
-		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_exitthree, x * 64, y * 64);
-	else if (game->map->moves >= 3)
-		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_exitfour, x * 64, y * 64);
+		game->img->img_exit_open, x * 64, y * 64);
+	}
 	else
+	{
 		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_exitone, x * 64, y * 64);
+		game->img->img_exit_close, x * 64, y * 64);
+	}
 }
 
 static void	screen_player(t_game *game, int y, int x)

@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:39:47 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:43:38 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exit_open);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_angle);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_haut);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_bas);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_gauche);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_droite);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_death);
@@ -80,70 +81,27 @@ int	key_actions(int key, t_game *game)
 
 void	ft_move_player(t_game *game, int x, int y, int key)
 {
-	int	move_is_ok;
 	int	col;
 	int	line;
 
 	col = game->data->pos_col;
 	line = game->data->pos_line;
-	move_is_ok = ftmove_is_ok(game, x, y, key);
-	if (move_is_ok == 1)
+	if (ftmove_is_ok(game, x, y, key) == 1)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
-		game->map->moves++;
-		game->map->mapping[line][col] = '0';
-		game->map->mapping[y][x] = 'P';
-		game->data->pos_line = y;
-		game->data->pos_col = x;
-		ft_imaging(game);
-		ft_score(game);
+		ft_move_one(game, x, y, col, line);
 	}
-	else if (move_is_ok == 2)
+	else if (ftmove_is_ok(game, x, y, key) == 2)
 	{
 		ft_going_player(game, key);
-		game->map->moves++;
-		line = 1;
-		while (line < game->map->lines - 1)
-		{
-			col = 1;
-			while ( col < game->map->columns - 1)
-			{
-				game->map->mapping[line][col] = 'D';
-				col++;
-			}
-			line++;
-		}
-		game->map->mapping[game->map->lines - 1][game->map->columns - 1] = 'D';
-		game->data->end_game = 1;
-		ft_imaging(game);
-		ft_score(game);
+		ft_move_two(game, x, y, col, line);
 	}
-	else if (move_is_ok == 3)
+	else if (ftmove_is_ok(game, x, y, key) == 3)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
-		game->map->moves++;
-		game->map->collectables--;
-		game->map->mapping[line][col] = '0';
-		game->map->mapping[y][x] = 'P';
-		if (game->data->going_player == 97 \
-		&& game->map->mapping[y][x - 1] != '0')
-			game->map->mapping[y][x - 1] = 'T';
-		else if (game->data->going_player == 100 \
-		&& game->map->mapping[y][x + 1] != '0')
-			game->map->mapping[y][x + 1] = 'T';
-		else if (game->data->going_player == 119 \
-		&& game->map->mapping[y - 1][x] != '0')
-			game->map->mapping[y - 1][x] = 'T';
-		else if (game->data->going_player == 115 \
-		&& game->map->mapping[y + 1][x] != '0')
-			game->map->mapping[y + 1][x] = 'T';
-		game->data->pos_line = y;
-		game->data->pos_col = x;
-		screen_collec_fear(game);
-		ft_imaging(game);
-		ft_score(game);
+		ft_move_three(game, x, y, col, line);
 	}
 }
 
@@ -154,7 +112,10 @@ int	ftmove_is_ok(t_game *game, int x, int y, int key)
 	if (game->map->mapping[y][x] == 'C')
 		return (3);
 	if (game->map->mapping[y][x] == 'Y')
+	{
+		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
 		return (2);
+	}
 	if (game->map->mapping[y][x] == 'E' && game->map->collectables == 0)
 	{
 		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';

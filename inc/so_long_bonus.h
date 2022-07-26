@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:28:53 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:44:38 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <time.h>
 
 # define BUFFER_SIZE 1
 /*base de donnees des images*/
@@ -76,11 +75,6 @@
 # define SOLDZERO "./images/soldzero.xpm"
 # define SOLDTWO "./images/soldtwo.xpm"
 # define COLLECTFEAR "./images/collectfear.xpm"
-# define EXITONE "./images/exitone.xpm"
-# define EXITTWO "./images/exittwo.xpm"
-# define EXITTHREE "./images/exitthree.xpm"
-# define EXITFOUR "./images/exitfour.xpm"
-# define EXITFIVE "./images/exitfive.xpm"
 /*base de donnees des key's*/
 # define ESC 65307
 # define QUIT 113
@@ -172,11 +166,6 @@ typedef struct s_img
 	void	*img_pipitwo;
 	void	*img_pipizero;
 	void	*img_collectfear;
-	void	*img_exitone;
-	void	*img_exittwo;
-	void	*img_exitthree;
-	void	*img_exitfour;
-	void	*img_exitfive;
 }	t_img;
 
 /*struct pour gerer la map*/
@@ -221,8 +210,11 @@ int		key_actions(int key, t_game *game);
 int		close_window_and_exit(t_game *game);
 /*fonction qui liberent toutes les images uploadees*/
 void	free_images(t_game *game);
-/*fonction qui gere les mouvements du player*/
+/*fonctions qui gere les mouvements du player*/
 void	ft_move_player(t_game *game, int x, int y, int key);
+void	ft_move_one(t_game *game, int x, int y, int col, int line);
+void	ft_move_two(t_game *game, int x, int y, int col, int line);
+void	ft_move_three(t_game *game, int x, int y, int col, int line);
 /*fonction qui ckeck si les mouvements du player sont ok*/
 int		ftmove_is_ok(t_game *game, int x, int y, int key);
 /*fonction pour afficher le game*/

@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 10:06:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:59:52 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:56:29 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,30 @@ void	position_collect(t_game *game)
 static int	test_movennemy(t_game *game, int x, int y)
 {
 	if (game->map->mapping[y][x] != '1' && game->map->mapping[y][x] != 'C' \
-	&& game->map->mapping[y][x] != 'E' && game->map->mapping[y][x] != 'T')
-		return (1);
-	else if (game->map->mapping[y][x] == 'P')
+	&& game->map->mapping[y][x] != 'E')
+		
+	int nombre = 0;
+    const int MIN = 1, MAX = 4;
+    srand(time(NULL)); 
+    if (game->map->mapping[y][x] != '1' && game->map->mapping[y][x] != 'C' \
+	&& game->map->mapping[y][x] != 'E')
 	{
-		game->data->end_game = 1;
-		ft_imaging(game);
-		return (0);
+		nombre = (rand() % (MAX + 1 - MIN)) + MIN;
 	}
+	nombre = (rand() % (MAX + 1 - MIN)) + MIN; // MIN <= nombre <= MAX
+    printf("%d", nombre); // rand  renvoie un nombre calculé à partir de la donnée seed
+
+    return 0;
+		
+		
+		return (1);
 	else
 		return (0);
 }
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 void	moving_ennemy(t_game *game, int key)
 {
 	int	x;
@@ -82,35 +94,34 @@ void	moving_ennemy(t_game *game, int key)
 	
 	x = game->data->pos_colennemy;
 	y = game->data->pos_linennemy;
+	printf("xxxxx yyyyy %d %d\n", y, x);
 	if (key)
-		nombre = (rand() % (MAX + 1 - MIN)) + MIN;
-	if (nombre == 1 && test_movennemy(game, x, y - 1))
 	{
-		game->data->going_ennemy = 97;
-		game->map->mapping[y - 1][x] = 'Y';
-		game->data->pos_linennemy--;
-		game->map->mapping[y][x] = '0';
+		nombre = (rand() % (MAX + 1 - MIN)) + MIN;
 	}
-	else if (nombre == 2 && test_movennemy(game, x, y + 1))
+
+	if ((key == A || key == ARROW_LEFT))
+	{
+		nombre = (rand() % (MAX + 1 - MIN)) + MIN;
+		game->data->going_ennemy = 97;
+		game->data->pos_colennemy--;
+	}
+	else if ((key == W || key == ARROW_UP) \
+	&& test_movennemy(game, x, y - 1))
 	{
 		game->data->going_ennemy = 119;
-		game->map->mapping[y + 1][x] = 'Y';
-		game->data->pos_linennemy++;
-		game->map->mapping[y][x] = '0';
+		game->data->pos_linennemy--;
 	}
-	else if (nombre == 3 && test_movennemy(game, x - 1, y))
+	else if ((key == S || key == ARROW_DOWN) \
+	&& test_movennemy(game, x,	y + 1))
 	{
 		game->data->going_ennemy = 115;
-		game->map->mapping[y][x - 1] = 'Y';
-		game->data->pos_colennemy--;
-		game->map->mapping[y][x] = '0';
+		y = game->data->pos_linennemy;
 	}
-	else if (nombre == 4 && test_movennemy(game, x + 1, y))
+	else if ((key == D || key == ARROW_RIGHT) \
+	&& test_movennemy(game, x + 1, y))
 	{
 		game->data->going_ennemy = 100;
-		game->map->mapping[y][x + 1] = 'Y';
-		game->data->pos_colennemy++;
-		game->map->mapping[y][x] = '0';
+		x = game->data->pos_colennemy;
 	}
-	ft_imaging(game);
 }
