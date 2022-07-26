@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 16:43:38 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:30:54 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exit_open);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_angle);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_haut);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_bas);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_gauche);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_droite);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_death);
@@ -81,23 +80,25 @@ int	key_actions(int key, t_game *game)
 
 void	ft_move_player(t_game *game, int x, int y, int key)
 {
+	int	move_is_ok;
 	int	col;
 	int	line;
 
 	col = game->data->pos_col;
 	line = game->data->pos_line;
-	if (ftmove_is_ok(game, x, y, key) == 1)
+	move_is_ok = ftmove_is_ok(game, x, y, key);
+	if (move_is_ok == 1)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
 		ft_move_one(game, x, y, col, line);
 	}
-	else if (ftmove_is_ok(game, x, y, key) == 2)
+	else if (move_is_ok == 2)
 	{
 		ft_going_player(game, key);
-		ft_move_two(game, x, y, col, line);
+		ft_move_two(game, col, line);
 	}
-	else if (ftmove_is_ok(game, x, y, key) == 3)
+	else if (move_is_ok == 3)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
@@ -112,10 +113,7 @@ int	ftmove_is_ok(t_game *game, int x, int y, int key)
 	if (game->map->mapping[y][x] == 'C')
 		return (3);
 	if (game->map->mapping[y][x] == 'Y')
-	{
-		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
 		return (2);
-	}
 	if (game->map->mapping[y][x] == 'E' && game->map->collectables == 0)
 	{
 		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';

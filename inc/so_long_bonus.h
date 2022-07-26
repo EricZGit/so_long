@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 16:44:38 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:44:12 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <time.h>
 
 # define BUFFER_SIZE 1
 /*base de donnees des images*/
@@ -75,6 +76,11 @@
 # define SOLDZERO "./images/soldzero.xpm"
 # define SOLDTWO "./images/soldtwo.xpm"
 # define COLLECTFEAR "./images/collectfear.xpm"
+# define EXITONE "./images/exitone.xpm"
+# define EXITTWO "./images/exittwo.xpm"
+# define EXITTHREE "./images/exitthree.xpm"
+# define EXITFOUR "./images/exitfour.xpm"
+# define EXITFIVE "./images/exitfive.xpm"
 /*base de donnees des key's*/
 # define ESC 65307
 # define QUIT 113
@@ -166,6 +172,11 @@ typedef struct s_img
 	void	*img_pipitwo;
 	void	*img_pipizero;
 	void	*img_collectfear;
+	void	*img_exitone;
+	void	*img_exittwo;
+	void	*img_exitthree;
+	void	*img_exitfour;
+	void	*img_exitfive;
 }	t_img;
 
 /*struct pour gerer la map*/
@@ -210,10 +221,10 @@ int		key_actions(int key, t_game *game);
 int		close_window_and_exit(t_game *game);
 /*fonction qui liberent toutes les images uploadees*/
 void	free_images(t_game *game);
-/*fonctions qui gere les mouvements du player*/
+/*fonction qui gere les mouvements du player*/
 void	ft_move_player(t_game *game, int x, int y, int key);
 void	ft_move_one(t_game *game, int x, int y, int col, int line);
-void	ft_move_two(t_game *game, int x, int y, int col, int line);
+void	ft_move_two(t_game *game, int col, int line);
 void	ft_move_three(t_game *game, int x, int y, int col, int line);
 /*fonction qui ckeck si les mouvements du player sont ok*/
 int		ftmove_is_ok(t_game *game, int x, int y, int key);
@@ -226,8 +237,9 @@ void	screen_ennemy(t_game *game, int line, int col, int death);
 /*fonction pour gerer les mouvements des ennemys*/
 void	moving_ennemy(t_game *game, int key);
 void	screen_movennemy(t_game *game, int y, int x);
-/*fonction pour afficher les traces de sang sur les murs*/
+/*fonctions pour afficher les traces de sang sur les murs*/
 void	screen_collectdeath(t_game *game, int y, int x);
+void	screen_collect_fearbis(t_game *game);
 /*fonction pour afficher le score dans la fenetre*/
 void	ft_score(t_game *game);
 /*fonctions qui anime les collectables*/

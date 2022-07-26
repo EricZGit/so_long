@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:44:06 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/25 10:33:00 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 09:34:21 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,9 @@ void	free_score_two(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_soldone);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_soldtwo);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_collectfear);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exitone);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exittwo);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exitthree);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exitfour);
+	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exitfive);
 }

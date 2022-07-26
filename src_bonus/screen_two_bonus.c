@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 07:05:32 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/25 11:56:55 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 20:20:19 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	screen_movennemy(t_game *game, int y, int x)
 		game->img->img_ennemy_droite, x * 64, y * 64);
 	if (game->data->going_ennemy == S)
 		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
-		game->img->img_ennemy_bas, x * 64, y * 64);
+		game->img->img_ennemy_haut, x * 64, y * 64);
 }
 
 void	screen_collec_guit(t_game *game)
 {
 	void	*imageguit;
-	
+
 	imageguit = NULL;
 	if (game->data->anim % 29 == 0)
 		imageguit = game->img->img_guitone;
@@ -80,9 +80,10 @@ void	screen_collec_guit(t_game *game)
 void	screen_collec_pipi(t_game *game)
 {
 	void	*imagepipi;
-	
+
 	imagepipi = NULL;
-	if (game->data->anim % 29 == 0)
+	if (game->data->anim % 29 == 0 || game->data->anim % 2 == 0 \
+	|| game->data->anim % 5 == 0)
 		imagepipi = game->img->img_pipione;
 	else if (game->data->anim % 49 == 0)
 		imagepipi = game->img->img_pipitwo;

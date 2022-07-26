@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:08 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/21 10:12:34 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 09:32:46 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	load_image_ennemy(t_game *game)
 	game->img->img_ennemy_haut = mlx_xpm_file_to_image(\
 		game->data->mlx_ptr, ENNEMY_HAUT, &(game->data->img_largeur), \
 		&(game->data->img_hauteur));
-	game->img->img_ennemy_bas = mlx_xpm_file_to_image(\
-		game->data->mlx_ptr, ENNEMY_BAS, &(game->data->img_largeur), \
+	game->img->img_exitfive = mlx_xpm_file_to_image(\
+		game->data->mlx_ptr, EXITFIVE, &(game->data->img_largeur), \
 		&(game->data->img_hauteur));
 	game->img->img_ennemy_droite = mlx_xpm_file_to_image(\
 		game->data->mlx_ptr, ENNEMY_DROITE, &(game->data->img_largeur), \
