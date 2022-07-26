@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:54:14 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 22:55:20 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:53:00 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	init_game(t_game *game)
 	game->map->moves = 0;
 	game->map->mapping = 0;
 	game->data->going_player = S;
+	game->data->going_ennemy = S;
 	game->data->anim = 0;
 }
 
@@ -94,12 +95,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.data->mlx_win, 2, 1L << 0, key_actions, &game);
 	mlx_hook(game.data->mlx_win, 17, 0, close_window_and_exit, &game);
 	mlx_loop_hook(game.data->mlx_ptr, ft_imaging, &game);
-//	if (game.map->collectables == 3)
-//	{
-		mlx_loop_hook(game.data->mlx_ptr, anim_collectone, &game);
-		mlx_loop_hook(game.data->mlx_ptr, anim_collecttwo, &game);
-		mlx_loop_hook(game.data->mlx_ptr, anim_collect, &game);
-//	}	
+	mlx_loop_hook(game.data->mlx_ptr, anim_collect, &game);
 	mlx_loop(game.data->mlx_ptr);
 	return (0);
 }

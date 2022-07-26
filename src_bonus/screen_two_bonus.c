@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 07:05:32 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 22:16:51 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 10:31:08 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,33 @@ void	screen_ennemy(t_game *game, int line, int col, int death)
 		}
 	}
 	else if (death == 89)
+	{
 		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
 		game->img->img_ennemy_haut, col * 64, line * 64);
+		screen_movennemy(game , line, col);
+	}
 }
 
 void	screen_collectdeath(t_game *game, int y, int x)
 {
 	mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
 		game->img->img_collectdeath, x * 64, y * 64);
+}
+
+void	screen_movennemy(t_game *game, int y, int x)
+{
+	if (game->data->going_ennemy == A)
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_ennemy_gauche, x * 64, y * 64);
+	if (game->data->going_ennemy == W)
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_ennemy_haut, x * 64, y * 64);
+	if (game->data->going_ennemy == D)
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_ennemy_droite, x * 64, y * 64);
+	if (game->data->going_ennemy == S)
+		mlx_put_image_to_window(game->data->mlx_ptr, game->data->mlx_win, \
+		game->img->img_ennemy_haut, x * 64, y * 64);
 }
 
 void	screen_collec_guit(t_game *game)
@@ -63,7 +82,8 @@ void	screen_collec_pipi(t_game *game)
 	void	*imagepipi;
 	
 	imagepipi = NULL;
-	if (game->data->anim % 29 == 0)
+	if (game->data->anim % 29 == 0 || game->data->anim % 2 == 0 \
+	|| game->data->anim % 5 == 0)
 		imagepipi = game->img->img_pipione;
 	else if (game->data->anim % 49 == 0)
 		imagepipi = game->img->img_pipitwo;

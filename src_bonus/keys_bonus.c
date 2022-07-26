@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 18:50:53 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 09:39:47 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	free_images(t_game *game)
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_exit_open);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_angle);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_haut);
-	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_bas);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_gauche);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_ennemy_droite);
 	mlx_destroy_image(game->data->mlx_ptr, game->img->img_death);
@@ -91,7 +90,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	if (move_is_ok == 1)
 	{
 		ft_going_player(game, key);
-//		moving_ennemy(game, key);
+		moving_ennemy(game, key);
 		game->map->moves++;
 		game->map->mapping[line][col] = '0';
 		game->map->mapping[y][x] = 'P';
@@ -123,7 +122,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	else if (move_is_ok == 3)
 	{
 		ft_going_player(game, key);
-//		moving_ennemy(game, key);
+		moving_ennemy(game, key);
 		game->map->moves++;
 		game->map->collectables--;
 		game->map->mapping[line][col] = '0';
@@ -142,6 +141,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 			game->map->mapping[y + 1][x] = 'T';
 		game->data->pos_line = y;
 		game->data->pos_col = x;
+		screen_collec_fear(game);
 		ft_imaging(game);
 		ft_score(game);
 	}
@@ -154,10 +154,7 @@ int	ftmove_is_ok(t_game *game, int x, int y, int key)
 	if (game->map->mapping[y][x] == 'C')
 		return (3);
 	if (game->map->mapping[y][x] == 'Y')
-	{
-		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
 		return (2);
-	}
 	if (game->map->mapping[y][x] == 'E' && game->map->collectables == 0)
 	{
 		game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';

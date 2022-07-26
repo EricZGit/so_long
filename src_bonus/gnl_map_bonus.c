@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:52:23 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 12:53:14 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/25 13:06:11 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ static int	check_items(char c, t_game *game)
 		game->data->pos_line = game->map->lines - 1;
 		game->map->players++;
 	}
-	else if (c == '0' || c == '1' || c == '\n' || c == 'Y')
+	else if (c == '0' || c == '1' || c == '\n')
 		return (1);
+	else if (c == 'Y')
+	{
+		game->data->pos_colennemy = game->map->columns - 1;
+		game->data->pos_linennemy = game->map->lines - 1;
+		return (1);
+	}
 	else
 		print_error(MAP, game);
 	return (1);

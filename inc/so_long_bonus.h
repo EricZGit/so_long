@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/22 22:54:38 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/26 09:28:53 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <time.h>
 
 # define BUFFER_SIZE 1
 /*base de donnees des images*/
@@ -74,6 +75,12 @@
 # define SOLDONE "./images/soldone.xpm"
 # define SOLDZERO "./images/soldzero.xpm"
 # define SOLDTWO "./images/soldtwo.xpm"
+# define COLLECTFEAR "./images/collectfear.xpm"
+# define EXITONE "./images/exitone.xpm"
+# define EXITTWO "./images/exittwo.xpm"
+# define EXITTHREE "./images/exitthree.xpm"
+# define EXITFOUR "./images/exitfour.xpm"
+# define EXITFIVE "./images/exitfive.xpm"
 /*base de donnees des key's*/
 # define ESC 65307
 # define QUIT 113
@@ -97,6 +104,7 @@ typedef struct s_data
 	int		pos_line;
 	int		end_game;
 	int		going_player;
+	int		going_ennemy;
 	int		anim;
 	int		pos_col_colzero;
 	int		pos_col_colone;
@@ -104,6 +112,8 @@ typedef struct s_data
 	int		pos_line_colzero;
 	int		pos_line_colone;
 	int		pos_line_coltwo;
+	int		pos_colennemy;
+	int		pos_linennemy;
 
 }	t_data;
 
@@ -161,6 +171,12 @@ typedef struct s_img
 	void	*img_pipione;
 	void	*img_pipitwo;
 	void	*img_pipizero;
+	void	*img_collectfear;
+	void	*img_exitone;
+	void	*img_exittwo;
+	void	*img_exitthree;
+	void	*img_exitfour;
+	void	*img_exitfive;
 }	t_img;
 
 /*struct pour gerer la map*/
@@ -215,14 +231,15 @@ int		ft_imaging(t_game *game);
 void	ft_going_player(t_game *game, int key);
 /*fonction pour afficher l ennemy*/
 void	screen_ennemy(t_game *game, int line, int col, int death);
+/*fonction pour gerer les mouvements des ennemys*/
+void	moving_ennemy(t_game *game, int key);
+void	screen_movennemy(t_game *game, int y, int x);
 /*fonction pour afficher les traces de sang sur les murs*/
 void	screen_collectdeath(t_game *game, int y, int x);
 /*fonction pour afficher le score dans la fenetre*/
 void	ft_score(t_game *game);
 /*fonctions qui anime les collectables*/
 int		anim_collect(t_game *game);
-int		anim_collectone(t_game *game);
-int		anim_collecttwo(t_game *game);
 void	free_score_two(t_game *game);
 void	screen_collec_sold(t_game *game);
 void	screen_collec_guit(t_game *game);
