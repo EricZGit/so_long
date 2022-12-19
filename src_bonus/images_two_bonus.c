@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 07:07:52 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 20:26:26 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 06:25:59 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	load_image_three(t_game *game)
 		&(game->data->img_hauteur));
 }
 
-void	ft_move_one(t_game *game, int x, int y, int col, int line)
+void	ft_move_one(t_game *game, int x, int y)
 {
 	game->map->moves++;
-	game->map->mapping[line][col] = '0';
+	game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
 	game->map->mapping[y][x] = 'P';
 	game->data->pos_line = y;
 	game->data->pos_col = x;
@@ -86,7 +86,7 @@ void	ft_move_two(t_game *game, int col, int line)
 	while (line < game->map->lines - 1)
 	{
 		col = 1;
-		while ( col < game->map->columns - 1)
+		while (col < game->map->columns - 1)
 		{
 			game->map->mapping[line][col] = 'D';
 			col++;
@@ -99,11 +99,11 @@ void	ft_move_two(t_game *game, int col, int line)
 	ft_score(game);
 }
 
-void	ft_move_three(t_game *game, int x, int y, int col, int line)
+void	ft_move_three(t_game *game, int x, int y)
 {
 	game->map->moves++;
 	game->map->collectables--;
-	game->map->mapping[line][col] = '0';
+	game->map->mapping[game->data->pos_line][game->data->pos_col] = '0';
 	game->map->mapping[y][x] = 'P';
 	if (game->data->going_player == 97 \
 	&& game->map->mapping[y][x - 1] != '0')

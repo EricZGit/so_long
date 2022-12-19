@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 10:06:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:59:52 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 10:06:48 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,14 @@ void	position_collect(t_game *game)
 	}
 }
 
-static int	test_movennemy(t_game *game, int x, int y)
+int	test_movennemy(t_game *game, int x, int y)
 {
 	if (game->map->mapping[y][x] != '1' && game->map->mapping[y][x] != 'C' \
 	&& game->map->mapping[y][x] != 'E' && game->map->mapping[y][x] != 'T')
 		return (1);
 	else if (game->map->mapping[y][x] == 'P')
 	{
-		game->data->end_game = 1;
-		ft_imaging(game);
+		ft_move_two(game, x, y);
 		return (0);
 	}
 	else
@@ -75,42 +74,23 @@ void	moving_ennemy(t_game *game, int key)
 {
 	int	x;
 	int	y;
-	int nombre = 0;
-	const int MIN = 1;
-	const int MAX = 4;
-	srand(time(NULL)); 
-	
+	int	nombre;
+
+	nombre = 0;
+	srand(time(NULL));
 	x = game->data->pos_colennemy;
 	y = game->data->pos_linennemy;
+	if (game->data->pos_col == x && game->data->pos_line == y)
+		ft_move_two(game, x, y);
 	if (key)
 		nombre = (rand() % (MAX + 1 - MIN)) + MIN;
 	if (nombre == 1 && test_movennemy(game, x, y - 1))
-	{
-		game->data->going_ennemy = 97;
-		game->map->mapping[y - 1][x] = 'Y';
-		game->data->pos_linennemy--;
-		game->map->mapping[y][x] = '0';
-	}
+		data_ennemy(game, 97);
 	else if (nombre == 2 && test_movennemy(game, x, y + 1))
-	{
-		game->data->going_ennemy = 119;
-		game->map->mapping[y + 1][x] = 'Y';
-		game->data->pos_linennemy++;
-		game->map->mapping[y][x] = '0';
-	}
+		data_ennemy(game, 119);
 	else if (nombre == 3 && test_movennemy(game, x - 1, y))
-	{
-		game->data->going_ennemy = 115;
-		game->map->mapping[y][x - 1] = 'Y';
-		game->data->pos_colennemy--;
-		game->map->mapping[y][x] = '0';
-	}
+		data_ennemybis(game, 115);
 	else if (nombre == 4 && test_movennemy(game, x + 1, y))
-	{
-		game->data->going_ennemy = 100;
-		game->map->mapping[y][x + 1] = 'Y';
-		game->data->pos_colennemy++;
-		game->map->mapping[y][x] = '0';
-	}
+		data_ennemybis(game, 100);
 	ft_imaging(game);
 }

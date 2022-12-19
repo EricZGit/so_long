@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:53:41 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 20:30:54 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 06:21:17 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
-		ft_move_one(game, x, y, col, line);
+		ft_move_one(game, x, y);
 	}
 	else if (move_is_ok == 2)
 	{
@@ -102,7 +102,7 @@ void	ft_move_player(t_game *game, int x, int y, int key)
 	{
 		ft_going_player(game, key);
 		moving_ennemy(game, key);
-		ft_move_three(game, x, y, col, line);
+		ft_move_three(game, x, y);
 	}
 }
 

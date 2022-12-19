@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:55:17 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/18 08:55:24 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:29:06 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,26 @@ char	**ft_split(char const *s, char c)
 	}
 	result[index] = 0;
 	return (result);
+}
+
+void	data_ennemybis(t_game *game, int key)
+{
+	if (key == 115)
+	{
+		game->map->mapping[game->data->pos_linennemy] \
+		[game->data->pos_colennemy - 1] = 'Y';
+		game->map->mapping[game->data->pos_linennemy] \
+		[game->data->pos_colennemy] = '0';
+		game->data->pos_colennemy--;
+	}
+	else if (key == 100)
+	{
+		game->map->mapping[game->data->pos_linennemy] \
+		[game->data->pos_colennemy + 1] = 'Y';
+		game->map->mapping[game->data->pos_linennemy] \
+		[game->data->pos_colennemy] = '0';
+		game->data->pos_colennemy++;
+	}
+	game->data->going_ennemy = key;
+	ft_imaging(game);
 }

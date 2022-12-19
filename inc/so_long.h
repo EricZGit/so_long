@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 10:48:03 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/13 08:05:43 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/28 08:11:41 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	free_images(t_game *game);
 void	ft_move_player(t_game *game, int x, int y, int key);
 /*fonction qui ckeck si les mouvements du player sont ok*/
 int		ftmove_is_ok(t_game *game, int x, int y, int key);
-
+/*fonction pour afficher le game*/
 int		ft_imaging(t_game *game);
 
 /*utils*/

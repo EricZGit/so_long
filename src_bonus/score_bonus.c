@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 10:44:06 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 09:34:21 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 06:25:21 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_score(t_game *game)
 		score /= 10;
 		cent = score / 10;
 		score %= 10;
-		ft_put_score(game, diz , game->map->lines - 1, 2);
+		ft_put_score(game, diz, game->map->lines - 1, 2);
 		ft_put_score(game, score, game->map->lines - 1, 1);
 		ft_put_scorex(game, cent, game->map->lines - 1, 0);
 	}

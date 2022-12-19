@@ -6,7 +6,7 @@
 #    By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 06:10:28 by ezielins          #+#    #+#              #
-#    Updated: 2022/07/26 20:44:51 by ezielins         ###   ########.fr        #
+#    Updated: 2022/07/27 06:12:17 by ezielins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ SRCS_BONUS = ./src_bonus/error_bonus.c \
 			./src_bonus/split_bonus.c \
 			./src_bonus/images_bonus.c \
 			./src_bonus/images_two_bonus.c \
-			./src_bonus/utils_three_bonus.c \
 			./src_bonus/keys_bonus.c \
 			./src_bonus/utils_two_bonus.c \
 			./src_bonus/screen_bonus.c \
 			./src_bonus/screen_two_bonus.c \
-			./src_bonus/score_bonus.c 
+			./src_bonus/score_bonus.c \
+			./src_bonus/utils_three_bonus.c
 					
 LMLX  = -L minilibx-linux -lmlx_Linux -I minilibx-linux -lXext -lX11 -lm -lz
 CFLAG = -Wall -Wextra -Werror

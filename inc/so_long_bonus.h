@@ -6,7 +6,7 @@
 /*   By: ezielins <ezielins@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 08:45:57 by ezielins          #+#    #+#             */
-/*   Updated: 2022/07/26 20:44:12 by ezielins         ###   ########.fr       */
+/*   Updated: 2022/07/27 08:46:05 by ezielins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <time.h>
 
 # define BUFFER_SIZE 1
+# define MAX 4
+# define MIN 1
 /*base de donnees des images*/
 # define PLAYER_HAUT "./images/player_haut.xpm"
 # define PLAYER_BAS "./images/player_bas.xpm"
@@ -223,13 +225,17 @@ int		close_window_and_exit(t_game *game);
 void	free_images(t_game *game);
 /*fonction qui gere les mouvements du player*/
 void	ft_move_player(t_game *game, int x, int y, int key);
-void	ft_move_one(t_game *game, int x, int y, int col, int line);
+void	ft_move_one(t_game *game, int x, int y);
 void	ft_move_two(t_game *game, int col, int line);
-void	ft_move_three(t_game *game, int x, int y, int col, int line);
+void	ft_move_three(t_game *game, int x, int y);
 /*fonction qui ckeck si les mouvements du player sont ok*/
 int		ftmove_is_ok(t_game *game, int x, int y, int key);
-/*fonction pour afficher le game*/
+/*fonctions pour afficher le game*/
 int		ft_imaging(t_game *game);
+void	screen_imaging(t_game *game, int x, int y);
+void	screen_map(t_game *game, int line, int col);
+void	screen_exit(t_game *game, int y, int x);
+void	screen_player(t_game *game, int y, int x);
 /*fonction pour determiner l orientation du player*/
 void	ft_going_player(t_game *game, int key);
 /*fonction pour afficher l ennemy*/
@@ -237,11 +243,15 @@ void	screen_ennemy(t_game *game, int line, int col, int death);
 /*fonction pour gerer les mouvements des ennemys*/
 void	moving_ennemy(t_game *game, int key);
 void	screen_movennemy(t_game *game, int y, int x);
+void	data_ennemy(t_game *game, int key);
+void	data_ennemybis(t_game *game, int key);
+int		test_movennemy(t_game *game, int x, int y);
 /*fonctions pour afficher les traces de sang sur les murs*/
 void	screen_collectdeath(t_game *game, int y, int x);
 void	screen_collect_fearbis(t_game *game);
-/*fonction pour afficher le score dans la fenetre*/
+/*fonctions pour afficher les images fixes dans la fenetre*/
 void	ft_score(t_game *game);
+void	screen_coin(t_game *game, int line, int col);
 /*fonctions qui anime les collectables*/
 int		anim_collect(t_game *game);
 void	free_score_two(t_game *game);
